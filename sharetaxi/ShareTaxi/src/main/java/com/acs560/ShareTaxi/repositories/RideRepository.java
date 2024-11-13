@@ -8,6 +8,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/*
+ * This repository is for handling all the functionalities related to the Ride
+ */
 @Repository
 public interface RideRepository extends JpaRepository<RideEntity, Long> {
 
