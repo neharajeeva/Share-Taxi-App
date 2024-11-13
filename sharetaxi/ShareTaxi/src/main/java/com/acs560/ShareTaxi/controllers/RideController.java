@@ -58,4 +58,11 @@ public class RideController {
     public List<RideEntity> getRidesByStatus(@PathVariable("status") String status) {
         return rideRepository.findByRideStatus(status);
     }
+
+    // Add a new ride
+    @PostMapping
+    public ResponseEntity<RideEntity> addRide(@RequestBody RideEntity rideEntity) {
+        RideEntity savedRide = rideRepository.save(rideEntity);
+        return ResponseEntity.ok(savedRide);
+    }
 }
