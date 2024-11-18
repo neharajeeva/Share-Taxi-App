@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -49,7 +48,7 @@ public class RideController {
 
     // Get rides within a specific time range
     @GetMapping("/time-range")
-    public List<RideEntity> getRidesByTimeRange(@RequestParam LocalDateTime startTime, @RequestParam LocalDateTime endTime) {
+    public List<RideEntity> getRidesByTimeRange(@RequestParam String startTime, @RequestParam String endTime) {
         return rideRepository.findByStartTimeBetween(startTime, endTime);
     }
 
@@ -71,7 +70,15 @@ public class RideController {
 
         // Save the new ride
         RideEntity savedRide = rideRepository.save(rideEntity);
-
         return ResponseEntity.ok(savedRide);
+    }
+
+    // Search for available rides by starting point, destination, and date
+    @GetMapping("/search")
+    public List<RideEntity> searchRides(@RequestParam String startingPoint, 
+                                        @RequestParam String destination, 
+                                        @RequestParam LocalDate date) {
+        // Call the repository to find rides that match the criteria
+        return rideRepository.findByStartingPointAndDestinationAndDate(startingPoint, destination, date);
     }
 }
