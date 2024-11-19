@@ -31,4 +31,7 @@ public interface RideRepository extends JpaRepository<RideEntity, Long> {
 
     // Find rides by ride status
     List<RideEntity> findByRideStatus(String rideStatus);
+
+    // Method to find rides by starting point, destination, and date
+    List<RideEntity> findByStartingPointAndDestinationAndDate(String startingPoint, String destination, LocalDate date);
 }
