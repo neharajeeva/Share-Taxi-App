@@ -45,12 +45,12 @@ public class RideController {
     public List<RideEntity> getRidesByAvailableSeats(@PathVariable("seats") int seats) {
         return rideRepository.findByAvailableSeatsGreaterThan(seats);
     }
-
-    // Get rides within a specific time range
-    @GetMapping("/time-range")
-    public List<RideEntity> getRidesByTimeRange(@RequestParam String startTime, @RequestParam String endTime) {
-        return rideRepository.findByStartTimeBetween(startTime, endTime);
-    }
+//
+//    // Get rides within a specific time range
+//    @GetMapping("/time-range")
+//    public List<RideEntity> getRidesByTimeRange(@RequestParam String startTime, @RequestParam String endTime) {
+//        return rideRepository.findByStartTimeBetween(startTime, endTime);
+//    }
 
     // Get rides by ride status
     @GetMapping("/status/{status}")
@@ -63,7 +63,6 @@ public class RideController {
     public ResponseEntity<RideEntity> addRide(@RequestBody RideEntity rideEntity) {
         // Validate that essential fields like startingPoint, destination, fuelPrice, and carType are provided
         if (rideEntity.getStartingPoint() == null || rideEntity.getDestination() == null || 
-            rideEntity.getFuelPrice() == null || rideEntity.getCarType() == null ||
             rideEntity.getAvailableSeats() <= 0 || rideEntity.getPricePerHead() == null) {
             return ResponseEntity.badRequest().body(null);
         }
