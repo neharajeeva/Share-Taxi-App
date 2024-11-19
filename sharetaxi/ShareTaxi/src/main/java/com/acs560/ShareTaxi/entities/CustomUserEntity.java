@@ -1,15 +1,18 @@
 package com.acs560.ShareTaxi.entities;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import com.acs560.ShareTaxi.serializers.CustomUserSerializer;
 
 @Entity
 @Table(name = "custom_users")
 @Getter
 @Setter
 @ToString
+@JsonSerialize(using = CustomUserSerializer.class)
 public class CustomUserEntity {
 
     @Id
