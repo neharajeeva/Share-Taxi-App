@@ -1,10 +1,5 @@
 package com.acs560.ShareTaxi.entities;
-
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,9 +13,6 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "rides")
-@Getter
-@Setter
-@ToString
 public class RideEntity {
 
     /**
@@ -100,5 +92,102 @@ public class RideEntity {
         inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private Set<CustomUserEntity> passengers = new HashSet<>();
-}
 
+    // Getters and Setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public CustomUserEntity getDriver() {
+        return driver;
+    }
+
+    public void setDriver(CustomUserEntity driver) {
+        this.driver = driver;
+    }
+
+    public CarEntity getCar() {
+        return car;
+    }
+
+    public void setCar(CarEntity car) {
+        this.car = car;
+    }
+
+    public String getStartingPoint() {
+        return startingPoint;
+    }
+
+    public void setStartingPoint(String startingPoint) {
+        this.startingPoint = startingPoint;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public BigDecimal getPricePerHead() {
+        return pricePerHead;
+    }
+
+    public void setPricePerHead(BigDecimal pricePerHead) {
+        this.pricePerHead = pricePerHead;
+    }
+
+    public int getAvailableSeats() {
+        return availableSeats;
+    }
+
+    public void setAvailableSeats(int availableSeats) {
+        this.availableSeats = availableSeats;
+    }
+
+    public String getRideStatus() {
+        return rideStatus;
+    }
+
+    public void setRideStatus(String rideStatus) {
+        this.rideStatus = rideStatus;
+    }
+
+    public Set<CustomUserEntity> getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(Set<CustomUserEntity> passengers) {
+        this.passengers = passengers;
+    }
+}
