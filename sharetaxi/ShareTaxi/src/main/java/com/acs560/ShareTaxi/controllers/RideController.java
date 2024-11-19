@@ -62,7 +62,16 @@ public class RideController {
     // Add a new ride
     @PostMapping
     public ResponseEntity<RideEntity> addRide(@RequestBody RideEntity rideEntity) {
+        // Validate that essential fields like startingPoint, destination, fuelPrice, and carType are provided
+        if (rideEntity.getStartingPoint() == null || rideEntity.getDestination() == null || 
+            rideEntity.getFuelPrice() == null || rideEntity.getCarType() == null ||
+            rideEntity.getAvailableSeats() <= 0 || rideEntity.getPricePerHead() == null) {
+            return ResponseEntity.badRequest().body(null);
+        }
+
+        // Save the new ride
         RideEntity savedRide = rideRepository.save(rideEntity);
+
         return ResponseEntity.ok(savedRide);
     }
 }

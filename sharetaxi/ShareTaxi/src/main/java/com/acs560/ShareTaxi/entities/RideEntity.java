@@ -100,5 +100,16 @@ public class RideEntity {
         inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private Set<CustomUserEntity> passengers = new HashSet<>();
-}
 
+    /**
+     * The fuel price per unit for the ride.
+     */
+    private BigDecimal fuelPrice;
+
+    /**
+     * The car type for the ride.
+     */
+    private String carType;
+
+    // Add a constructor, setters and getters using Lombok annotations
+}
