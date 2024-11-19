@@ -1,10 +1,6 @@
 package com.acs560.ShareTaxi.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 import java.math.BigDecimal;
 
 /**
@@ -15,9 +11,6 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "cars")
-@Getter
-@Setter
-@ToString
 public class CarEntity {
 
     /**
@@ -69,6 +62,72 @@ public class CarEntity {
      */
     @Column(length = 50)
     private String carType;
+
+    // Getters and Setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public CustomUserEntity getOwner() {
+        return owner;
+    }
+
+    public void setOwner(CustomUserEntity owner) {
+        this.owner = owner;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getLicensePlate() {
+        return licensePlate;
+    }
+
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
+    }
+
+    public int getSeatsAvailable() {
+        return seatsAvailable;
+    }
+
+    public void setSeatsAvailable(int seatsAvailable) {
+        this.seatsAvailable = seatsAvailable;
+    }
+
+    public BigDecimal getMileage() {
+        return mileage;
+    }
+
+    public void setMileage(BigDecimal mileage) {
+        this.mileage = mileage;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getCarType() {
+        return carType;
+    }
+
+    public void setCarType(String carType) {
+        this.carType = carType;
+    }
 
     /**
      * Returns a string representation of the car, including the model and license plate.

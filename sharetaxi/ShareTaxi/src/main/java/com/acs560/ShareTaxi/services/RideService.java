@@ -12,17 +12,17 @@ public interface RideService {
 
     Optional<RideEntity> getRideById(Long id);
 
-    List<RideEntity> getRidesByDriverId(Long driverId);
+    //List<RideEntity> getRidesByDriverId(Long driverId);
 
-    List<RideEntity> getRidesByStartingPointAndDestination(String startingPoint, String destination);
+    //List<RideEntity> getRidesByStartingPointAndDestination(String startingPoint, String destination);
 
-    List<RideEntity> getRidesByDate(LocalDate date);
+    //List<RideEntity> getRidesByDate(LocalDate date);
 
-    List<RideEntity> getRidesWithAvailableSeats(int minimumSeats);
+    //List<RideEntity> getRidesWithAvailableSeats(int minimumSeats);
 
-    List<RideEntity> getRidesByTimeRange(LocalDateTime startTime, LocalDateTime endTime);
+    //List<RideEntity> getRidesByTimeRange(LocalDateTime startTime, LocalDateTime endTime);
 
-    List<RideEntity> getRidesByStatus(String status);
+    //List<RideEntity> getRidesByStatus(String status);
 
     RideEntity createRide(RideEntity ride);
 
@@ -31,5 +31,6 @@ public interface RideService {
     void deleteRide(Long id);
 
 	List<RideEntity> getRidesByDriver(Long driverId);
-}
 
+	//List<RideEntity> getRidesByDriver(Long driverId);
+}
