@@ -1,6 +1,10 @@
 package com.acs560.ShareTaxi.services.impl;
 
+import com.acs560.ShareTaxi.entities.CustomUserEntity;
+import com.acs560.ShareTaxi.entities.RideEntity;
 import com.acs560.ShareTaxi.entities.RideRequestEntity;
+import com.acs560.ShareTaxi.repositories.CustomUserRepository;
+import com.acs560.ShareTaxi.repositories.RideRepository;
 import com.acs560.ShareTaxi.repositories.RideRequestRepository;
 import com.acs560.ShareTaxi.services.RideRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +18,12 @@ public class RideRequestServiceImpl implements RideRequestService {
 
     @Autowired
     private RideRequestRepository rideRequestRepository;
+    
+    @Autowired
+    private RideRepository rideRepository;
+    
+    @Autowired
+    private CustomUserRepository customUserRepository;
 
     @Override
     public RideRequestEntity createRideRequest(RideRequestEntity rideRequest) {
@@ -28,6 +38,25 @@ public class RideRequestServiceImpl implements RideRequestService {
             request.setRequestStatus(updatedRequest.getRequestStatus());
             request.setSeatsRequested(updatedRequest.getSeatsRequested());
             request.setComments(updatedRequest.getComments());
+            
+            // Check if the request is accepted
+            if ("Accepted".equalsIgnoreCase(updatedRequest.getRequestStatus())) {
+                Optional<RideEntity> rideOptional = rideRepository.findById(request.getRide().getId());
+                Optional<CustomUserEntity> userOptional = customUserRepository.findById(request.getRequestedBy().getId());
+
+                if (rideOptional.isPresent() && userOptional.isPresent()) {
+                    RideEntity ride = rideOptional.get();
+                    CustomUserEntity user = userOptional.get();
+
+                    // Add user to the ride's passenger list
+                    ride.getPassengers().add(user);
+
+                    // Save the ride to update the passengers list
+                    rideRepository.save(ride);
+                } else {
+                    throw new IllegalArgumentException("Ride or User not found for the given request.");
+                }
+            }
             return rideRequestRepository.save(request);
         }
         throw new IllegalArgumentException("Ride request with ID " + requestId + " not found.");
