@@ -4,5 +4,5 @@ import com.acs560.ShareTaxi.models.CustomUser;
 
 public interface CustomUserService {
     CustomUser registerUser(String username,String email, String password);
-    CustomUser authenticateUser(String username, String password);
+    CustomUser authenticateUser(String email, String password);
 }
