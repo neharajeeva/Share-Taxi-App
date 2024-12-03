@@ -25,19 +25,19 @@ public class AuthController {
     public ResponseEntity<ResponseMessage> registerUser(@RequestBody RegisterRequest request) {
         try {
             CustomUser newUser = customUserService.registerUser(request.getUsername(),request.getEmail(),request.getPassword());
-            return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage("User registered successfully", newUser));
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage("User registered successfully", newUser, true));
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(e.getMessage(), null));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(e.getMessage(), null, false));
         }
     }
 
     @PostMapping("/login")
     public ResponseEntity<ResponseMessage> loginUser(@RequestBody LoginRequest request) {
         try {
-            CustomUser authenticatedUser = customUserService.authenticateUser(request.getUsername(), request.getPassword());
-            return ResponseEntity.ok(new ResponseMessage("Login successful", authenticatedUser));
+            CustomUser authenticatedUser = customUserService.authenticateUser(request.getEmail(), request.getPassword());
+            return ResponseEntity.ok(new ResponseMessage("Login successful", authenticatedUser, true));
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ResponseMessage(e.getMessage(), null));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ResponseMessage(e.getMessage(), null, false));
         }
     }
 
@@ -58,29 +58,31 @@ public class AuthController {
     }
 
     public static class LoginRequest {
-        private String username;
+        private String email;
         private String password;
 
         // Getters and setters
-        public String getUsername() { return username; }
-        public void setUsername(String username) { this.username = username; }
+        public String getEmail() { return email; }
+        public void setEmail(String email) { this.email = email; }
         public String getPassword() { return password; }
         public void setPassword(String password) { this.password = password; }
     }
 
     // Helper method to create response messages
-    private Object createResponseMessage(String message, CustomUser user) {
-        return new ResponseMessage(message, user);
+    private Object createResponseMessage(String message, CustomUser user, Boolean success) {
+        return new ResponseMessage(message, user, success);
     }
 
     // Response message structure
     private static class ResponseMessage {
         private String message;
         private CustomUser user;
+        private Boolean success;
 
-        public ResponseMessage(String message, CustomUser user) {
+        public ResponseMessage(String message, CustomUser user, Boolean success) {
             this.message = message;
             this.user = user;
+            this.success = success;
         }
 
         public String getMessage() {
@@ -89,6 +91,10 @@ public class AuthController {
 
         public CustomUser getUser() {
             return user;
+        }
+        
+        public Boolean getSuccess() {
+        	return success;
         }
     }
 }

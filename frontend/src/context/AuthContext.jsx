@@ -16,6 +16,8 @@ const AuthProvider = ({ children }) => {
       try {
         const user = JSON.parse(localStorage.getItem('user'))
 
+        console.log("Console PRint",user);
+
         if (user) {
           setIsLoggedIn(true);
           setUser(user);
@@ -30,30 +32,30 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   
-  const setprofile = async ()=>{
+  // const setprofile = async ()=>{
 
-    const config = {
-        withCredentials: true
-      }
-    try {
-      const response = await axios.get('/api/getuserprofile/', config);
-      if (response.data) {
-        setIsLoggedIn(true);
-        setUser(response.data);
-        localStorage.setItem('user',JSON.stringify(response.data))
-      }
-    } catch (error) {
-      console.error('Error checking login status:', error);
-    }
-  }
+  //   const config = {
+  //       withCredentials: true
+  //     }
+  //   try {
+  //     const response = await axios.get('/api/getuserprofile/', config);
+  //     if (response.data) {
+  //       setIsLoggedIn(true);
+  //       setUser(response.data);
+  //       localStorage.setItem('user',JSON.stringify(response.data))
+  //     }
+  //   } catch (error) {
+  //     console.error('Error checking login status:', error);
+  //   }
+  // }
   
   const login = async (email, password) => {
     try {
       const response = await axios.post('/api/auth/login', { email, password }, { withCredentials: true });
       if (response.data.success) {
+        localStorage.setItem('user',JSON.stringify(response.data.user))
         setIsLoggedIn(true);
         setUser(response.data.user);
-        localStorage.setItem('user',JSON.stringify(response.data.user))
       }
       return response.data;
     } catch (error) {
@@ -65,9 +67,9 @@ const AuthProvider = ({ children }) => {
     try {
       const response = await axios.post('/api/auth/register', { username, email, password }, { withCredentials: true });
       if (response.data.success) {
-        setIsLoggedIn(true);
-        setUser(response.data.user);
         localStorage.setItem('user',JSON.stringify(response.data.user))
+        setIsLoggedIn(true);
+        setUser(response.data.user); 
       }
       return response.data;
     } catch (error) {

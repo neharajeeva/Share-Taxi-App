@@ -45,7 +45,7 @@ const router = createBrowserRouter([
       path:"go",
       element: (
         <AuthWrapper>
-          <TokenRefresher />
+          
           <RidesProvider>
             <RootLayout />
           </RidesProvider>

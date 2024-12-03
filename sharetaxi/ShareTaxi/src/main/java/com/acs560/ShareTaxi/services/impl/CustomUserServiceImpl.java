@@ -32,8 +32,8 @@ public class CustomUserServiceImpl implements CustomUserService {
     }
 
     @Override
-    public CustomUser authenticateUser(String username, String password) {
-        CustomUserEntity userEntity = customUserRepository.findByUsername(username)
+    public CustomUser authenticateUser(String email, String password) {
+        CustomUserEntity userEntity = customUserRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found!"));
         if (!passwordEncoder.matches(password, userEntity.getPassword())) {
             throw new RuntimeException("Invalid credentials!");
