@@ -106,7 +106,7 @@ const SignUp = () => {
           <div style={{display:'flex', justifyContent:'left'}}>
             <NavLink to="/"><ArrowBack  /></NavLink>
           </div>
-        <h1>TAG ALONG..</h1>
+        <h1>SHARE TAXI..</h1>
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2} justifyContent="center">
             <Grid item xs={12}>

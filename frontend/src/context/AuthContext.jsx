@@ -49,7 +49,7 @@ const AuthProvider = ({ children }) => {
   
   const login = async (email, password) => {
     try {
-      const response = await axios.post('/api/loginuser/', { email, password }, { withCredentials: true });
+      const response = await axios.post('/api/auth/login', { email, password }, { withCredentials: true });
       if (response.data.success) {
         setIsLoggedIn(true);
         setUser(response.data.user);
@@ -63,7 +63,7 @@ const AuthProvider = ({ children }) => {
   };
   const signup = async (username, email, password) => {
     try {
-      const response = await axios.post('/api/createuser/', { username, email, password }, { withCredentials: true });
+      const response = await axios.post('/api/auth/register', { username, email, password }, { withCredentials: true });
       if (response.data.success) {
         setIsLoggedIn(true);
         setUser(response.data.user);

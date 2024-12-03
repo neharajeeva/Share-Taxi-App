@@ -22,7 +22,7 @@ const Welcome = () => {
 
             <div className='inline'>
                 <div className='grid-item'>
-                    <h1>TAG ALONG..</h1>
+                    <h1>Share Taxi..</h1>
                     <h2>Affordable Rides and make new Friends</h2>
 
                     <div className='inline-200'>
@@ -82,12 +82,12 @@ const Welcome = () => {
 
         </section>
 
-        <section id='devteam' className='content orange-back'>
+        {/* <section id='devteam' className='content orange-back'>
                 
             <h1>Meet the Team</h1>
             <img src="/developers.png" style={{position:'relative'}} alt="" />
 
-        </section>
+        </section> */}
 
         <section className='content dark-blue-back Footer' style={{position:'relative'}}>
                    
