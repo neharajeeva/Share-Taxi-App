@@ -17,13 +17,14 @@ public class CustomUserServiceImpl implements CustomUserService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public CustomUser registerUser(String username, String password) {
+    public CustomUser registerUser(String username, String email, String password) {
         if (customUserRepository.findByUsername(username).isPresent()) {
             throw new RuntimeException("User already exists!");
         }
         CustomUserEntity userEntity = new CustomUserEntity();
         userEntity.setUsername(username);
         userEntity.setPassword(passwordEncoder.encode(password));
+        userEntity.setEmail(email);
         userEntity.setRole("USER");
 
         CustomUserEntity savedUser = customUserRepository.save(userEntity);
