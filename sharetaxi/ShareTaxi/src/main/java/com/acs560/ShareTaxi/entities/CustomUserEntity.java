@@ -28,7 +28,10 @@ public class CustomUserEntity {
     @Column(nullable = false)
     private String role;
 
-    // Getters and setters (if you prefer explicit ones)
+    @Column(unique = true, nullable = false)
+    private String email;
+
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -59,5 +62,13 @@ public class CustomUserEntity {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
