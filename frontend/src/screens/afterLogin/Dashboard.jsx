@@ -56,7 +56,7 @@ export default function Dashboard() {
               // Perform your date comparison here, assuming searchData.date is the date you want to compare with
               // Adjust this condition based on how you want to compare the dates
               console.log(ride)
-              return ride.date === searchData.date.toISOString().split('T')[0] && ride.ride_status==='Active' && ride.driver.username!==user.username;
+              return ride.date === searchData.date.toISOString().split('T')[0] && ride.rideStatus==='Yet to Start' && ride.driver.username!==user.username;
             });
           
             // Update searchResults with the filtered rides
@@ -177,19 +177,20 @@ export default function Dashboard() {
 
         <div className="dashboard-container">
             <h2 style={{fontWeight:'bold'}}>Most Recent Rides</h2>
-
             {
+                
                 recentRides
                     .slice()
                     .reverse()
-                    .filter(ride => ride.ride_status === "Active" && ride.driver.username !== user.username)
+                    .filter(ride => ride.rideStatus === "Yet to Start" && ride.driver.username !== user.username)
                     .length !== 0 ? (
                         recentRides
                             .slice()
                             .reverse()
-                            .filter(ride => ride.ride_status === "Active" && ride.driver.username !== user.username)
+                            .filter(ride => ride.rideStatus === "Yet to Start" && ride.driver.username !== user.username)
                             .map(ride => (
                                 <RideListView key={ride.id} id={ride.id} data={ride} />
+                                //JSON.stringify(ride)
                             ))
                     ) : (
                         <h6>No Requests to show</h6>

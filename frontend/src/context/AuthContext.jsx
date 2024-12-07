@@ -80,11 +80,11 @@ const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.post('/api/logoutuser/', null, { withCredentials: true });
+      // await axios.post('/api/logoutuser/', null, { withCredentials: true });
       setIsLoggedIn(false);
       setUser(null);
-      Cookies.remove('access_token');
-      Cookies.remove('refresh_token');
+      // Cookies.remove('access_token');
+      // Cookies.remove('refresh_token');
       localStorage.removeItem('user');
     } catch (error) {
       console.error('Logout error:', error);
