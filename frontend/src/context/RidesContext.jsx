@@ -122,8 +122,9 @@ const RidesProvider = ({children}) => {
 
     const fetchRecentRides = async () => {
         try {
-          const response = await axios.get('/api/rides/rides_list/',{withCredentials:true});
+          const response = await axios.get('/api/rides',{withCredentials:true});
           setRecentRides(response.data);
+          console.log(recentRides)
         } catch (error) {
           console.error('Error fetching recent rides:', error);
         }
