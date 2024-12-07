@@ -182,12 +182,12 @@ export default function Dashboard() {
                 recentRides
                     .slice()
                     .reverse()
-                    .filter(ride => ride.rideStatus === "Yet to Start" && ride.driver.username !== user.username)
+                    .filter(ride => ride.rideStatus !== "Deleted" && ride.driver.username !== user.username)
                     .length !== 0 ? (
                         recentRides
                             .slice()
                             .reverse()
-                            .filter(ride => ride.rideStatus === "Yet to Start" && ride.driver.username !== user.username)
+                            .filter(ride => ride.rideStatus !== "Deleted" && ride.driver.username !== user.username)
                             .map(ride => (
                                 <RideListView key={ride.id} id={ride.id} data={ride} />
                                 //JSON.stringify(ride)

@@ -25,21 +25,22 @@ const RidesProvider = ({children}) => {
     const createride = async (data) => {
         
         const req_data = {
-            "car": 1,
-            "starting_point": data.from,
+            "driver":{"id":user.id},
+            "car": {"id":1},
+            "startingPoint": data.from,
             "destination": data.to,
             "date": data.date.toISOString().split('T')[0],
-            "starttime":data.departingTime.toISOString().slice(0, 19),
-            "endtime":data.arrivalTime.toISOString().slice(0, 19),
-            "price_per_head": parseFloat(data.pricePerHead),
-            "available_seats": parseInt(data.seats),
-            "ride_status": "Active",
+            "startTime":data.departingTime.toISOString().slice(0, 19),
+            "endTime":data.arrivalTime.toISOString().slice(0, 19),
+            "pricePerHead": parseFloat(data.pricePerHead),
+            "availableSeats": parseInt(data.seats),
+            "rideStatus": "Active",
             "passengers": []
           }
         
         try {
             // Make a POST request to the /api/create/ endpoint
-            const response = await axios.post('/api/rides/create/', req_data, { withCredentials: true });
+            const response = await axios.post('/api/rides', req_data, { withCredentials: true });
     
             // Log the response data
             console.log('Ride created successfully:', response.data);

@@ -19,12 +19,12 @@ export default function ActiveListView({data}){
     
     const content = {
         date:data.date,
-        from:data.starting_point,
+        from:data.startingPoint,
         to:data.destination,
-        startTime:data.starttime.slice(11, 16).split(':').map((component) => component.padStart(2, '0')).join(':'),
-        endtime:data.endtime.slice(11, 16).split(':').map((component) => component.padStart(2, '0')).join(':'),
-        seats:data.available_seats,
-        price:data.price_per_head,
+        startTime:data.startTime.slice(11, 16).split(':').map((component) => component.padStart(2, '0')).join(':'),
+        endtime:data.endTime.slice(11, 16).split(':').map((component) => component.padStart(2, '0')).join(':'),
+        seats:data.availableSeats,
+        price:data.pricePerHead,
         driver:data.driver.username,
         car:data.car.model,
         id:data.id,
@@ -34,8 +34,8 @@ export default function ActiveListView({data}){
         },
         passengers:data.passengers
     }
-    const startDate = new Date(data.starttime);
-    const endDate = new Date(data.endtime);
+    const startDate = new Date(data.startTime);
+    const endDate = new Date(data.endTime);
     const durationInMillis = endDate.getTime() - startDate.getTime();
 
     content.duration.hours = Math.floor(durationInMillis / (1000 * 60 * 60));
@@ -76,7 +76,7 @@ export default function ActiveListView({data}){
                     </div>
                 </div>
 
-                <StatusTag status={data.ride_status} /><br />
+                <StatusTag status={data.rideStatus} /><br />
                 
                 <div className='ridelist-body'>
                     <div className='fromto'>
