@@ -25,6 +25,7 @@ function Navbar() {
     const handleLogout = () => {
         // Call the logout function from AuthContext
         logout();
+        
     };
 
     const location = useLocation();
