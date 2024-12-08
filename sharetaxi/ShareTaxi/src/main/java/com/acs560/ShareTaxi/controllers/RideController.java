@@ -2,6 +2,8 @@ package com.acs560.ShareTaxi.controllers;
 
 import com.acs560.ShareTaxi.entities.RideEntity;
 import com.acs560.ShareTaxi.repositories.RideRepository;
+import com.acs560.ShareTaxi.services.RideService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,9 @@ public class RideController {
 
     @Autowired
     private RideRepository rideRepository;
+    
+    @Autowired
+    private RideService rideService;
 
     // Get all rides
     @GetMapping
@@ -71,7 +76,20 @@ public class RideController {
         RideEntity savedRide = rideRepository.save(rideEntity);
         return ResponseEntity.ok(savedRide);
     }
-
+    
+	 // Update an existing ride
+	    @PatchMapping("/{id}")
+	    public ResponseEntity<RideEntity> updateRide(@PathVariable Long id, @RequestBody RideEntity updatedRide) {
+	        try {
+	            RideEntity updatedEntity = rideService.updateRide(id, updatedRide);
+	            return ResponseEntity.ok(updatedEntity);
+	        } catch (IllegalArgumentException e) {
+	            return ResponseEntity.notFound().build();
+	        } catch (Exception e) {
+	            return ResponseEntity.badRequest().body(null);
+	        }
+	    }
+    
     // Search for available rides by starting point, destination, and date
     @GetMapping("/search")
     public List<RideEntity> searchRides(@RequestParam String startingPoint, 

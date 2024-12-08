@@ -21,8 +21,8 @@ export default function ActiveListView({data}){
         date:data.date,
         from:data.startingPoint,
         to:data.destination,
-        startTime:data.startTime.slice(11, 16).split(':').map((component) => component.padStart(2, '0')).join(':'),
-        endtime:data.endTime.slice(11, 16).split(':').map((component) => component.padStart(2, '0')).join(':'),
+        startTime:data.date? data.startTime.slice(11, 16).split(':').map((component) => component.padStart(2, '0')).join(':') : '',
+        endtime:data.endTime? data.endTime.slice(11, 16).split(':').map((component) => component.padStart(2, '0')).join(':'):'',
         seats:data.availableSeats,
         price:data.pricePerHead,
         driver:data.driver.username,
@@ -71,7 +71,7 @@ export default function ActiveListView({data}){
                 <div style={{width:'100%', display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                     <h5><IonIcon icon={calendarOutline} /> {content.date} | RideID #{content.id}</h5><br />
                     <div style={{display:'flex'}}>
-                        <EditRide data={content}/>
+                        <EditRide data={content} updateData = {data}/>
                         <button style={{margin:'5px'}} className='iconbutton deleteicon' onClick={handleDelete}><IonIcon icon={trashOutline} /></button>
                     </div>
                 </div>
