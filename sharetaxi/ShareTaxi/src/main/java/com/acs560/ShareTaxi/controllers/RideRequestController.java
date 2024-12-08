@@ -52,4 +52,11 @@ public class RideRequestController {
         List<RideRequestEntity> rideRequests = rideRequestService.getRideRequestsByUser(userId);
         return ResponseEntity.ok(rideRequests);
     }
+    
+    // New endpoint to fetch all ride requests
+    @GetMapping
+    public ResponseEntity<List<RideRequestEntity>> getAllRideRequests() {
+        List<RideRequestEntity> allRideRequests = rideRequestService.getAllRideRequests();
+        return ResponseEntity.ok(allRideRequests);
+    }
 }

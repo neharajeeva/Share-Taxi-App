@@ -36,13 +36,13 @@ export default function RequestListView({data}){
     return(
         <>
             <div className="ride-list-view" style={{height:'fit-content'}}>
-            <h5><span style={{fontWeight:'bold'}}>Requester </span> <span style={{color:'purple'}}>@{data.requested_by.username}</span></h5><br />
+            <h5><span style={{fontWeight:'bold'}}>Requester </span> <span style={{color:'purple'}}>@{data.requestedBy.username}</span></h5><br />
             
                 <div className='ridelist-body'>
                     
                     <div className='reqseats center'>
                         <h5 style={{fontWeight:'bold'}}>Requested Seats</h5>
-                        <h5>{data.seats_requested}</h5>
+                        <h5>{data.seatsRequested}</h5>
                     </div>
 
                     <div className='comments'>

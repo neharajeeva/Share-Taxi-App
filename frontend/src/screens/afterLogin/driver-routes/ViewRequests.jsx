@@ -73,11 +73,11 @@ export default function ViewRequests({data}) {
                 </div>
             </div> */}
             <div style={{padding:'0% 10%'}}>
-            {rideRequests.length !== 0 && rideRequests.slice().reverse().filter(req => req.request_status === "Pending" ).map(req => (
+            {rideRequests.length !== 0 && rideRequests.slice().reverse().filter(req => req.requestStatus === "Pending" ).map(req => (
                 <RequestListView key={req.id} id={req.id} data={req} />
             ))}
             {
-              rideRequests.filter(req => req.request_status === "Pending" ).length == 0 && <h6>No Requests to show</h6>
+              rideRequests.filter(req => req.requestStatus === "Pending" ).length == 0 && <h6>No Requests to show</h6>
             }
             
             </div>

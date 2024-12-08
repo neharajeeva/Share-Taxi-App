@@ -17,4 +17,6 @@ public interface RideRequestService {
     List<RideRequestEntity> getRideRequestsByRide(Long rideId);
 
     List<RideRequestEntity> getRideRequestsByUser(Long userId);
+    
+    List<RideRequestEntity> getAllRideRequests();
 }

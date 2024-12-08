@@ -82,4 +82,10 @@ public class RideRequestServiceImpl implements RideRequestService {
     public List<RideRequestEntity> getRideRequestsByUser(Long userId) {
         return rideRequestRepository.findByRequestedBy_Id(userId);
     }
+    
+    @Override
+    public List<RideRequestEntity> getAllRideRequests() {
+        return rideRequestRepository.findAll();
+    }
+    
 }
