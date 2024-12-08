@@ -6,12 +6,12 @@ const AuthWrapper = ({ children }) => {
   const { isLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (!isLoggedIn) {
-  //     // If user is not logged in, navigate to the login page
-  //     navigate('/login');
-  //   }
-  // }, [isLoggedIn, navigate]);
+  useEffect(() => {
+    if (!isLoggedIn) {
+      // If user is not logged in, navigate to the login page
+      navigate('/login');
+    }
+  }, [isLoggedIn, navigate]);
 
   // Render the children components only if user is logged in
   return isLoggedIn ? children : null;
