@@ -139,14 +139,19 @@ const RidesProvider = ({children}) => {
 
       const createRideRequest = async (data) => {
         const req_data = {
-           "ride":data.ride,
+          "requestedBy":{
+            "id":user.id
+          },
+           "ride":{
+            "id":data.ride
+           },
            "comments":data.comments,
-           "seats_requested":parseInt(data.seats),
-           "request_status":"Pending"
+           "seatsRequested":parseInt(data.seats),
+           "requestStatus":"Pending"
         }
         try {
           console.log(req_data)
-          const response = await axios.post('/api/rides/ride_requests/create/', req_data,{withCredentials:true});
+          const response = await axios.post('/api/ride-requests', req_data,{withCredentials:true});
           console.log('Ride Request Created Successfully')
           return true
         } catch (error) {
@@ -183,7 +188,7 @@ const RidesProvider = ({children}) => {
       const handleApproval = async (request_id, accept) => {
         
         try {
-          const decision = accept? "Accepted" : "Declined"
+          const decision = accept? "Approved" : "Declined"
 
           const req_data = {
             requestStatus: decision
@@ -201,7 +206,7 @@ const RidesProvider = ({children}) => {
 
       const fetchMyRideRequests = async () => {
         try {
-          const response = await axios.get('/api/ride-requests',{withCredentials:true});
+          const response = await axios.get('/api/ride-requests/by-user/'+user.id,{withCredentials:true});
           setMyRideRequests(response.data);
         } catch (error) {
           console.error('Error fetching recent rides:', error);
