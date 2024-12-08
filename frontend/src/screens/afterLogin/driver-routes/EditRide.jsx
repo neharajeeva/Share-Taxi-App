@@ -14,7 +14,7 @@ import { RidesContext } from '../../../context/RidesContext';
 import CustomSnackbar from '../../../components/SnackBar';
 
 
-export default function EditRide({data}) {
+export default function EditRide({data, updateData}) {
   const [openSnack, setOpenSnack] = useState(false);
   const [message, setMessage] = useState('');
   const [severity, setSeverity] = useState('success'); // Default to success
@@ -23,16 +23,19 @@ export default function EditRide({data}) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+
+
   const [formData, setFormData] = useState({
-    from: '',
-    to: '',
-    date: null,
-    departingTime: null,
-    arrivalTime: null,
+    from: updateData.startingPoint,
+    to: updateData.destination,
+    date: updateData.date,
+    departingTime: updateData.startTime,
+    arrivalTime: updateData.endTime,
     vehicle: '',
-    seats: '',
-    pricePerHead: '',
-    status:'Active'
+    seats: updateData.seats,
+    pricePerHead: updateData.pricePerHead,
+    status:updateData.rideStatus,
+    passengers:updateData.passengers
   });
 
   const handleChange = (e) => {

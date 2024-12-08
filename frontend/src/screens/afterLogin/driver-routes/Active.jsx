@@ -1,17 +1,19 @@
 import { useContext, useEffect } from "react";
 import ActiveListView from "../../../components/ActiveListView";
 import { RidesContext } from "../../../context/RidesContext";
+import { AuthContext } from "../../../context/AuthContext";
 
 export default function Active(){
-    const {myrides, fetchMyRides, refreshRides, changeRefreshRides} = useContext(RidesContext)
+    const {user} = useContext(AuthContext)
+    const {recentRides, fetchRecentRides, refreshRides, changeRefreshRides} = useContext(RidesContext)
 
     useEffect(() => {
-        fetchMyRides()
+        fetchRecentRides()
     },[])
 
     useEffect(() => {
         if(refreshRides){
-            fetchMyRides()
+            fetchRecentRides()
             changeRefreshRides(false)
         }
         
@@ -21,11 +23,12 @@ export default function Active(){
         <div>
             <br />
             <br />
-            {myrides.length !== 0 && myrides.slice().reverse().filter(ride => ride.ride_status !== "Deleted").map(ride => (
+            {console.log(recentRides)}
+            {recentRides.length !== 0 && recentRides.slice().reverse().filter(ride => ride.rideStatus !== "Deleted" && ride.driver.username===user.username).map(ride => (
                 <ActiveListView key={ride.id} id={ride.id} data={ride} />
             ))}
             {
-              myrides.length == 0 && <h6>No Requests to show</h6>
+              recentRides.length == 0 && <h6>No Requests to show</h6>
             }
             
         </div>

@@ -19,12 +19,12 @@ export default function ActiveListView({data}){
     
     const content = {
         date:data.date,
-        from:data.starting_point,
+        from:data.startingPoint,
         to:data.destination,
-        startTime:data.starttime.slice(11, 16).split(':').map((component) => component.padStart(2, '0')).join(':'),
-        endtime:data.endtime.slice(11, 16).split(':').map((component) => component.padStart(2, '0')).join(':'),
-        seats:data.available_seats,
-        price:data.price_per_head,
+        startTime:data.date? data.startTime.slice(11, 16).split(':').map((component) => component.padStart(2, '0')).join(':') : '',
+        endtime:data.endTime? data.endTime.slice(11, 16).split(':').map((component) => component.padStart(2, '0')).join(':'):'',
+        seats:data.availableSeats,
+        price:data.pricePerHead,
         driver:data.driver.username,
         car:data.car.model,
         id:data.id,
@@ -34,8 +34,8 @@ export default function ActiveListView({data}){
         },
         passengers:data.passengers
     }
-    const startDate = new Date(data.starttime);
-    const endDate = new Date(data.endtime);
+    const startDate = new Date(data.startTime);
+    const endDate = new Date(data.endTime);
     const durationInMillis = endDate.getTime() - startDate.getTime();
 
     content.duration.hours = Math.floor(durationInMillis / (1000 * 60 * 60));
@@ -44,7 +44,7 @@ export default function ActiveListView({data}){
     const {deleteRide, changeRefreshRides } = useContext(RidesContext)
 
     const handleDelete = async () => {
-        const success = await deleteRide(data.id)
+        const success = await deleteRide(data.id,data)
         if(success) {
             setSeverity('success');
             setMessage('Success! Your Ride was Deleted successfully.');
@@ -71,12 +71,12 @@ export default function ActiveListView({data}){
                 <div style={{width:'100%', display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                     <h5><IonIcon icon={calendarOutline} /> {content.date} | RideID #{content.id}</h5><br />
                     <div style={{display:'flex'}}>
-                        <EditRide data={content}/>
+                        <EditRide data={content} updateData = {data}/>
                         <button style={{margin:'5px'}} className='iconbutton deleteicon' onClick={handleDelete}><IonIcon icon={trashOutline} /></button>
                     </div>
                 </div>
 
-                <StatusTag status={data.ride_status} /><br />
+                <StatusTag status={data.rideStatus} /><br />
                 
                 <div className='ridelist-body'>
                     <div className='fromto'>
@@ -111,7 +111,7 @@ export default function ActiveListView({data}){
 
                         <div className='Rate/Head center'>
                             <h5 className='bold'>Rate</h5>
-                            <h5 className='price'><span style={{color:'green'}}>${content.price}</span> /head</h5>
+                            <h5 className='price'><span style={{color:'green'}}>${content.price}</span> /person</h5>
                         </div>
                     </div>
                 </div>
