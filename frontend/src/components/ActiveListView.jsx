@@ -111,7 +111,7 @@ export default function ActiveListView({data}){
 
                         <div className='Rate/Head center'>
                             <h5 className='bold'>Rate</h5>
-                            <h5 className='price'><span style={{color:'green'}}>${content.price}</span> /head</h5>
+                            <h5 className='price'><span style={{color:'green'}}>${content.price}</span> /person</h5>
                         </div>
                     </div>
                 </div>
