@@ -44,7 +44,7 @@ export default function ActiveListView({data}){
     const {deleteRide, changeRefreshRides } = useContext(RidesContext)
 
     const handleDelete = async () => {
-        const success = await deleteRide(data.id)
+        const success = await deleteRide(data.id,data)
         if(success) {
             setSeverity('success');
             setMessage('Success! Your Ride was Deleted successfully.');

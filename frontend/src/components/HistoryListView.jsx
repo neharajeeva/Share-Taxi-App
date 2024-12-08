@@ -37,7 +37,7 @@ export default function HistoryListView({data}){
             <div className="ride-list-view">
                 <div style={{display:'flex', justifyContent:'space-between'}}>
                     <h5><IonIcon icon={calendarOutline} /> {content.date} | RideID #{content.id}</h5><br />
-                    <StatusTag status={data.ride_status} />
+                    <StatusTag status={data.rideStatus} />
                 </div>
                 <div className='ridelist-body'>
                     <div className='fromto'>

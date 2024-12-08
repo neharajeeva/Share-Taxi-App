@@ -106,19 +106,15 @@ const RidesProvider = ({children}) => {
       }
   }
 
-  const deleteRide = async (ride_id) => {
-    const req_data = {
-      "ride_id":ride_id,
-      "update":{
-          "ride_status":"Deleted"
-      }
-    };
+  const deleteRide = async (ride_id,data) => {
+    const req_data = data;
+    req_data.rideStatus = "Deleted"
 
     console.log(req_data)
 
     try {
         // Make a POST request to the /api/create/ endpoint
-        const response = await axios.patch('/api/rides/update/', req_data, { withCredentials: true });
+        const response = await axios.patch('/api/rides/'+ride_id, req_data, { withCredentials: true });
 
         // Log the response data
         console.log('Ride Deleted successfully:', response.data);
