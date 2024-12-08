@@ -13,9 +13,11 @@ export default function Requested(){
         
         <>
             <br /><br />
-            {myRideRequests.length!==0 && myRideRequests.slice().reverse().filter(req => req.request_status === "Pending" ).map((req) => (
+            {myRideRequests.length!==0 ? myRideRequests.slice().reverse().filter(req => req.requestStatus === "Pending" ).map((req) => (
                 <PassRequestListView key={req.id} data={req}/>
-            ))}
+            )):
+            <p>No Requests Found</p>
+        }
             
         </>
     )

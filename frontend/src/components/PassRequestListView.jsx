@@ -15,12 +15,12 @@ export default function PassRequestListView({data}){
 
     const content = {
         date:data.ride.date,
-        from:data.ride.starting_point,
+        from:data.ride.startingPoint,
         to:data.ride.destination,
-        startTime:data.ride.starttime.slice(11, 16).split(':').map((component) => component.padStart(2, '0')).join(':'),
-        endtime:data.ride.endtime.slice(11, 16).split(':').map((component) => component.padStart(2, '0')).join(':'),
-        seats:data.ride.available_seats,
-        price:data.ride.price_per_head,
+        startTime:data.ride.startTime.slice(11, 16).split(':').map((component) => component.padStart(2, '0')).join(':'),
+        endtime:data.ride.endTime.slice(11, 16).split(':').map((component) => component.padStart(2, '0')).join(':'),
+        seats:data.ride.availableSeats,
+        price:data.ride.pricePerHead,
         driver:data.ride.driver.username,
         car:data.ride.car.model,
         ride_id:data.ride.id,
@@ -29,12 +29,12 @@ export default function PassRequestListView({data}){
             minutes:0
         },
         comments:data.comments,
-        requested_seats:data.requested_seats,
+        requested_seats:data.requestedSeats,
         request_id:data.id,
-        request_status:data.request_status
+        request_status:data.requestStatus
     }
-    const startDate = new Date(data.ride.starttime);
-    const endDate = new Date(data.ride.endtime);
+    const startDate = new Date(data.ride.startTime);
+    const endDate = new Date(data.ride.endTime);
     const durationInMillis = endDate.getTime() - startDate.getTime();
 
     content.duration.hours = Math.floor(durationInMillis / (1000 * 60 * 60));
