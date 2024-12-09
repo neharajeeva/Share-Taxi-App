@@ -80,3 +80,17 @@ footer a:hover, footer a:focus {
     }
 }
 
+.stats-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.stats-table th, .stats-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.stats-table th {
+    background-color: #f4f4f4;
+}

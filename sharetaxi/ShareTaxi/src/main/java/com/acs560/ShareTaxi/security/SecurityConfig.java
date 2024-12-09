@@ -22,7 +22,7 @@ public class SecurityConfig {
         http
             .csrf().disable() // Disable CSRF for testing; enable in production with proper setup
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/api/auth/register", "/api/auth/login", "api/rides/**", "api/cars/**","api/ride-requests/**").permitAll() // Allow access to register and login
+                .requestMatchers("/api/auth/register", "/api/stats", "/api/auth/login", "api/rides/**", "api/cars/**","api/ride-requests/**").permitAll() // Allow access to register and login
                 .anyRequest().authenticated() // Require authentication for all other requests
             )
             .formLogin().disable() // Disable form login
