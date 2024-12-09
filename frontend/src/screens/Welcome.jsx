@@ -10,6 +10,23 @@ import ParticlesBackground from './Particles';
 
 const Welcome = () => {
 
+    const [stats, setStats] = useState([]);
+
+    // Fetch data from the API
+    const fetchStats = async () => {
+        try {
+            const response = await fetch('/api/stats');  // Adjust the URL if needed
+            const data = await response.json();
+            setStats(data);  // Store the stats data in state
+        } catch (error) {
+            console.error('Error fetching stats:', error);
+        }
+    };
+
+    // Call fetchStats when the component mounts
+    useEffect(() => {
+        fetchStats();
+    }, []);
 
     return (
             <>
@@ -82,6 +99,39 @@ const Welcome = () => {
 
         </section>
 
+        <section id="stats" className="content inline">
+            <div className="grid-item">
+                <img src="/upper-photo.png" alt="Transport" />
+            </div>
+            <div className="grid-item">
+                <h1>User Statistics</h1>
+                <p className="description">
+                Explore the transportation trends within our community. These statistics provide insights into the usage patterns of various transport modes and user preferences, helping us enhance the Tag Along platform.
+                </p>
+                <div className="stats-table">
+                    {stats.length > 0 ? (
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Transport Mode</th>
+                                    <th>Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {stats.map((stat, index) => (
+                                    <tr key={index}>
+                                        <td>{stat.transportMode}</td>
+                                        <td>{stat.count}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    ) : (
+                        <p>Loading stats...</p>
+                    )}
+                </div>
+            </div>
+        </section>
         {/* <section id='devteam' className='content orange-back'>
                 
             <h1>Meet the Team</h1>
