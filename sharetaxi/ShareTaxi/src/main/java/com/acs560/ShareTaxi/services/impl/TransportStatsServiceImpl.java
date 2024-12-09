@@ -1,7 +1,9 @@
 package com.acs560.ShareTaxi.services.impl;
 
-import com.acs560.ShareTaxi.models.TransportStats;
-import com.acs560.ShareTaxi.services.StatsService;
+import com.acs560.ShareTaxi.entities.TransportStatsEntity;
+import com.acs560.ShareTaxi.repositories.TransportStatsRepository;
+import com.acs560.ShareTaxi.services.TransportStatsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -11,13 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class StatsServiceImpl implements StatsService {
+public class TransportStatsServiceImpl implements TransportStatsService {
 
     private static final String CSV_FILE_PATH = "student_transport_stats.csv"; // Relative to resources folder
 
+    @Autowired
+    private TransportStatsRepository transportStatsRepository;
+
     @Override
-    public List<TransportStats> getStatsFromCsv() {
-        List<TransportStats> stats = new ArrayList<>();
+    public List<TransportStatsEntity> getStatsFromCsv() {
+        List<TransportStatsEntity> stats = new ArrayList<>();
 
         // Load the file as a resource
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(CSV_FILE_PATH);
@@ -31,8 +36,13 @@ public class StatsServiceImpl implements StatsService {
             br.readLine(); // Skip header
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
-                stats.add(new TransportStats(data[0], Integer.parseInt(data[1])));
+                TransportStatsEntity stat = new TransportStatsEntity(data[0], Integer.parseInt(data[1]));
+                stats.add(stat);
             }
+
+            // Save all to database
+            transportStatsRepository.saveAll(stats);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
