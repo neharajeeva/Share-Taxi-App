@@ -9,6 +9,7 @@ export default defineConfig({
       '/api': {
         //target: 'https://tagalong-backend-210589d74651.herokuapp.com', // The Django server
         target: 'http://127.0.0.1:8080', // The Spring Boot server 
+        //target:'http://10.0.0.190:8080', // The UBUNTU SERVER
         //target: 'https://tag-along-backend.onrender.com', //render Server string
         changeOrigin: true,
       },

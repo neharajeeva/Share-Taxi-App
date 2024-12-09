@@ -59,7 +59,7 @@ function Navbar() {
         
         <div style={brandStyle}>
             <IonIcon icon={carSport} style={{ fontSize: '2rem' ,margin:'0px 10px'}} />
-            <h2 style={{fontWeight:'bold', marginBottom:'0px'}}>TAG ALONG</h2>
+            <h2 style={{fontWeight:'bold', marginBottom:'0px'}}>SHARE TAXI</h2>
         </div>
 
         <Offcanvas show={show} onHide={handleClose} id='sidebar'>
