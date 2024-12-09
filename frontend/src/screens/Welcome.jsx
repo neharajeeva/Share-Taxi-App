@@ -67,12 +67,12 @@ const Welcome = () => {
                 </div>
                 <div className='grid-item'>
                     <h1>
-                        What is Tag Along?
+                        Share Taxi
                     </h1>
                     <p className='description'>
                     A transformative solution designed to bridge the transportation gap within university communities.
 
-                    Tag Along provides a dynamic platform where members with vehicles can seamlessly connect with those in need of transportation.
+                    Share Taxi provides a dynamic platform where members with vehicles can seamlessly connect with those in need of transportation.
                     </p>
                 </div>
 
@@ -106,7 +106,7 @@ const Welcome = () => {
             <div className="grid-item">
                 <h1>User Statistics</h1>
                 <p className="description">
-                Explore the transportation trends within our community. These statistics provide insights into the usage patterns of various transport modes and user preferences, helping us enhance the Tag Along platform.
+                Explore the transportation trends within our community. These statistics provide insights into the usage patterns of various transport modes and user preferences, helping us enhance the Share Taxi platform.
                 </p>
                 <div className="stats-table">
                     {stats.length > 0 ? (
